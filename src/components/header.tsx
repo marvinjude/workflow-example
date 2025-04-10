@@ -43,12 +43,6 @@ export function Header() {
                 Integrations
               </Link>
               <Link
-                href="/actions"
-                className="inline-flex items-center px-1 pt-1 text-sm font-medium"
-              >
-                Actions
-              </Link>
-              <Link
                 href="/workflows"
                 className="inline-flex items-center px-1 pt-1 text-sm font-medium"
               >

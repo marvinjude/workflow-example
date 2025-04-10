@@ -1,5 +1,11 @@
 import "./globals.css"
 import '@integration-app/react/styles.css'
+import { Instrument_Sans } from 'next/font/google'
+
+const instrumentSans = Instrument_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 import { AuthProvider } from "./auth-provider"
 import { RootLayout } from "@/components/root-layout"
@@ -16,12 +22,12 @@ export const metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={instrumentSans.className}>
         <AuthProvider>
           <IntegrationProvider>
             <RootLayout>
               {children}
-              </RootLayout>
+            </RootLayout>
           </IntegrationProvider>
         </AuthProvider>
       </body>

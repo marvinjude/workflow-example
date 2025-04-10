@@ -16,11 +16,18 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import { ActionsList } from "./components/actions-list"
+
+interface Workflow {
+  id: string
+  name: string
+  // Add other workflow properties as needed
+}
 
 export default function WorkflowDetailPage() {
   const router = useRouter()
   const { id } = useParams()
-  const [workflow, setWorkflow] = useState<any>(null)
+  const [workflow, setWorkflow] = useState<Workflow | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState("")
@@ -57,7 +64,7 @@ export default function WorkflowDetailPage() {
       })
 
       if (!response.ok) throw new Error("Failed to update workflow")
-      
+
       const updatedWorkflow = await response.json()
       setWorkflow(updatedWorkflow)
       setIsEditing(false)
@@ -75,7 +82,7 @@ export default function WorkflowDetailPage() {
       })
 
       if (!response.ok) throw new Error("Failed to delete workflow")
-      
+
       router.push("/workflows")
     } catch (error) {
       console.error("Failed to delete workflow:", error)
@@ -176,7 +183,14 @@ export default function WorkflowDetailPage() {
       </div>
 
       <div className="flex-1 relative bg-gray-50 dark:bg-gray-900">
-        <WorkflowEditor />
+        <div className="flex h-full">
+          <div className="flex-1">
+            <WorkflowEditor />
+          </div>
+          <div className="w-[420px]">
+            <ActionsList />
+          </div>
+        </div>
       </div>
 
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>

@@ -4,8 +4,9 @@ import { ObjectId } from "mongodb"
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> } 
 ) {
+  const { id } = await params;
   try {
     const { nodes } = await req.json()
     const { db } = await connectToDatabase()
@@ -13,7 +14,7 @@ export async function PUT(
     const result = await db
       .collection("workflows")
       .findOneAndUpdate(
-        { _id: new ObjectId(params.id) },
+        { _id: new ObjectId(id) },
         { $set: { nodes } },
         { returnDocument: "after" }
       )

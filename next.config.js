@@ -3,12 +3,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'static.integration.app',
-        pathname: '/files/**',
+        protocol: "https",
+        hostname: "static.integration.app",
+        pathname: "/**",
       },
     ],
   },
-}
+};
 
-module.exports = nextConfig 
+module.exports = nextConfig;
